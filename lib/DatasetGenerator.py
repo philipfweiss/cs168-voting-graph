@@ -12,7 +12,6 @@ class DatasetGenerator:
             'Medicaid',
             'Civil Liberties',
             'Israel',
-            'Firearms',
             'all',
         ]
         self.issue_call_map = self.load_pickle('./pickle/issue_call_map.pkl')
