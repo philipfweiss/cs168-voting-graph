@@ -13,7 +13,7 @@ class DatasetGenerator:
             'Civil Liberties',
             'Israel',
             'Firearms',
-            'ALL',
+            'all',
         ]
         self.issue_call_map = self.load_pickle('./pickle/issue_call_map.pkl')
         self.issue_map, self.call_uid_map = {}, {}
@@ -25,15 +25,15 @@ class DatasetGenerator:
     def generate_datasets(self):
         graphs = {}
         for issue in self.issues:
-            if issue != 'ALL':
+            if issue != 'all':
                 for session_id in self.congresses:
                     matrix, senator_ids = self.generate_dataset(self.issue_map[issue][session_id])
-                    if np.sum(matrix) != 0:
+                    if np.sum(matrix) > 500:
                         graphs[(issue, session_id)] = matrix, senator_ids
             else:
                 for session_id in self.congresses: 
                     matrix, senator_ids = self.generate_dataset(self.call_uid_map[session_id].values())
-                    if not np.sum(matrix) != 0:
+                    if not np.sum(matrix) > 500:
                         graphs[(issue, session_id)] = matrix, senator_ids
 
         return graphs
