@@ -28,12 +28,12 @@ class DatasetGenerator:
             if issue != 'all':
                 for session_id in self.congresses:
                     matrix, senator_ids = self.generate_dataset(self.issue_map[issue][session_id])
-                    if np.sum(matrix) > 500:
+                    if np.sum(matrix) > 2000:
                         graphs[(issue, session_id)] = matrix, senator_ids
             else:
                 for session_id in self.congresses: 
                     matrix, senator_ids = self.generate_dataset(self.call_uid_map[session_id].values())
-                    if not np.sum(matrix) > 500:
+                    if np.sum(matrix) > 2000:
                         graphs[(issue, session_id)] = matrix, senator_ids
 
         return graphs
